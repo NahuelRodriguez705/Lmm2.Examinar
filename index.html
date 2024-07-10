@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Zoom</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .center-circle {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .color-circle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            transform-origin: center;
+        }
+        .button-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .zoom-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-circle">
+        <div class="color-circle" style="top: 10%; left: 10%; background-color: red;"></div>
+        <div class="color-circle" style="top: 10%; left: 30%; background-color: blue;"></div>
+        <div class="color-circle" style="top: 10%; left: 50%; background-color: green;"></div>
+        <div class="color-circle" style="top: 10%; left: 70%; background-color: yellow;"></div>
+        <div class="color-circle" style="top: 10%; left: 90%; background-color: purple;"></div>
+        <div class="color-circle" style="top: 30%; left: 10%; background-color: orange;"></div>
+        <div class="color-circle" style="top: 30%; left: 30%; background-color: pink;"></div>
+        <div class="color-circle" style="top: 30%; left: 50%; background-color: cyan;"></div>
+        <div class="color-circle" style="top: 30%; left: 70%; background-color: lime;"></div>
+        <div class="color-circle" style="top: 30%; left: 90%; background-color: magenta;"></div>
+        <div class="color-circle" style="top: 50%; left: 10%; background-color: teal;"></div>
+        <div class="color-circle" style="top: 50%; left: 30%; background-color: navy;"></div>
+        <div class="color-circle" style="top: 50%; left: 50%; background-color: olive;"></div>
+        <div class="color-circle" style="top: 50%; left: 70%; background-color: maroon;"></div>
+        <div class="color-circle" style="top: 50%; left: 90%; background-color: aqua;"></div>
+        <div class="color-circle" style="top: 70%; left: 10%; background-color: silver;"></div>
+        <div class="color-circle" style="top: 70%; left: 30%; background-color: gold;"></div>
+        <div class="color-circle" style="top: 70%; left: 50%; background-color: coral;"></div>
+        <div class="color-circle" style="top: 70%; left: 70%; background-color: sienna;"></div>
+        <div class="color-circle" style="top: 70%; left: 90%; background-color: plum;"></div>
+    </div>
+    <div class="button-container">
+        <button class="zoom-button" onclick="zoomIn()">+</button>
+        <button class="zoom-button" onclick="zoomOut()">-</button>
+    </div>
+
+    <script>
+        let zoomLevel = 1;
+
+        function zoomIn() {
+            zoomLevel *= 2;
+            resizeCircles();
+        }
+
+        function zoomOut() {
+            zoomLevel /= 2;
+            resizeCircles();
+        }
+
+        function resizeCircles() {
+            const centerCircle = document.querySelector('.center-circle');
+            const colorCircles = centerCircle.querySelectorAll('.color-circle');
+
+            centerCircle.style.width = `${50 * zoomLevel}px`;
+            centerCircle.style.height = `${50 * zoomLevel}px`;
+
+            colorCircles.forEach(circle => {
+                const circleSize = 2 * zoomLevel;
+                circle.style.width = `${circleSize}px`;
+                circle.style.height = `${circleSize}px`;
+            });
+        }
+    </script>
+</body>
+</html>
